@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../../redux/filtersSlice';
+import { setNameFilter, selectNameFilter } from '../../redux/filtersSlice';
+
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filters.name);
+  const filter = useSelector(selectNameFilter);
 
-  const handleChange = (e) => {
-    dispatch(changeFilter(e.target.value));
-  };
+  
 
   return (
     <div>
@@ -16,8 +15,8 @@ export default function SearchBox() {
         <input className="contact_form_field"
           type="text"
           value={filter}
-          onChange={handleChange}
-          placeholder="Search contacts"/>
+          onChange={(e) => dispatch(setNameFilter(e.target.value))}
+      placeholder="Search contacts"/>
       </label>
     </div>
   );
